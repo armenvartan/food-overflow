@@ -1,11 +1,12 @@
 class VotesController < ApplicationController
   def create
     @vote = Vote.new(vote_params)
+    @votes = Vote.all
     if @vote.save
-      redirect_to votes_path
+      render :index, layout: false
     else
       flash[:notice] = "There was an error"
-      redirect_to votes_path
+      render :index, layout: false
     end
   end
 
@@ -15,6 +16,7 @@ class VotesController < ApplicationController
   def index
     @vote = Vote.new
     @votes = Vote.all
+    render :index, layout: false
   end
 
   private
